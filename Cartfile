@@ -1,0 +1,10 @@
+github "Alamofire/Alamofire"
+github "SwiftyJSON/SwiftyJSON"
+github "drmohundro/SWXMLHash"
+
+
+# How to update
+# carthage update --platform iOS --no-use-binaries
+
+# How to install Carthage
+# brew install carthage
