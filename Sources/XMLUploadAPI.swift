@@ -26,7 +26,6 @@ public func upload<T: XMLUploadAPI>(api: T, completion: @escaping (Alamofire.Res
             completion(.failure(error))
         case .success(let request, _, _):
             request.responseData(completionHandler: { response in
-                response.timeline
                 switch response.result {
                 case let .failure(error):
                     completion(Result.failure(error))
