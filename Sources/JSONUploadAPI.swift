@@ -27,7 +27,7 @@ public func upload<T: JSONUploadAPI>(api: T, completion: @escaping (Alamofire.Re
         case .failure(let error):
             completion(.failure(error))
         case .success(let request, _, _):
-            request.responseJSON(completionHandler: { response in
+            request.responseJSON { response in
                 switch response.result {
                 case let .failure(error):
                     completion(Result.failure(error))
@@ -35,7 +35,7 @@ public func upload<T: JSONUploadAPI>(api: T, completion: @escaping (Alamofire.Re
                     let json = JSON(object)
                     completion(api.handle(json: json))
                 }
-            })
+            }
         }
     }
 }

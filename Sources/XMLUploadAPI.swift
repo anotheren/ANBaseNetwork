@@ -14,18 +14,20 @@ public protocol XMLUploadAPI: BaseAPI {
     
     associatedtype ResultType
     
-    var multipartFormData: ((Alamofire.MultipartFormData) -> Void) { get }
+    func handle(fromData: Alamofire.MultipartFormData)
     
     func handle(xml: XMLIndexer) -> Alamofire.Result<ResultType>
 }
 
 public func upload<T: XMLUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
-    Alamofire.upload(multipartFormData: api.multipartFormData, to: api.url, method: api.method, headers: api.headers, encodingCompletion: { encodingResult in
+    Alamofire.upload(multipartFormData: { fromData in
+        api.handle(fromData: fromData)
+    }, to: api.url, method: api.method, headers: api.headers) { encodingResult in
         switch encodingResult {
         case .failure(let error):
             completion(.failure(error))
         case .success(let request, _, _):
-            request.responseData(completionHandler: { response in
+            request.responseData { response in
                 switch response.result {
                 case let .failure(error):
                     completion(Result.failure(error))
@@ -33,7 +35,7 @@ public func upload<T: XMLUploadAPI>(api: T, completion: @escaping (Alamofire.Res
                     let xml = SWXMLHash.parse(data)
                     completion(api.handle(xml: xml))
                 }
-            })
+            }
         }
-    })
+    }
 }
