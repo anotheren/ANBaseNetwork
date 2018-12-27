@@ -14,13 +14,15 @@ public protocol JSONUploadAPI: BaseAPI {
     
     associatedtype ResultType
     
-    var multipartFormData: ((Alamofire.MultipartFormData) -> Void) { get }
+    func handle(fromData: Alamofire.MultipartFormData)
     
     func handle(json: JSON) -> Alamofire.Result<ResultType>
 }
 
 public func upload<T: JSONUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
-    Alamofire.upload(multipartFormData: api.multipartFormData, to: api.url, method: api.method, headers: api.headers, encodingCompletion: { encodingResult in
+    Alamofire.upload(multipartFormData: { fromData in
+        api.handle(fromData: fromData)
+    }, to: api.url, method: api.method, headers: api.headers) { encodingResult in
         switch encodingResult {
         case .failure(let error):
             completion(.failure(error))
@@ -35,5 +37,5 @@ public func upload<T: JSONUploadAPI>(api: T, completion: @escaping (Alamofire.Re
                 }
             })
         }
-    })
+    }
 }
