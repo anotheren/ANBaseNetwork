@@ -1,4 +1,6 @@
 github "Alamofire/Alamofire"
+github "SwiftyJSON/SwiftyJSON"
+github "drmohundro/SWXMLHash"
 
 
 # How to update
