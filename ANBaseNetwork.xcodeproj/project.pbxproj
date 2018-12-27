@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A02F928021D4B6B80052D837 /* JSONUploadAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02F927F21D4B6B80052D837 /* JSONUploadAPI.swift */; };
+		A02F928221D4B7A60052D837 /* XMLUploadAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02F928121D4B7A60052D837 /* XMLUploadAPI.swift */; };
 		A0D1913F21D0D47800FCF51A /* ANBaseNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = A0D1913D21D0D47800FCF51A /* ANBaseNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0D1914D21D0DFC400FCF51A /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1914A21D0DFC300FCF51A /* BaseAPI.swift */; };
 		A0D1914E21D0DFC400FCF51A /* JSONRequestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1914B21D0DFC300FCF51A /* JSONRequestAPI.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A02F927F21D4B6B80052D837 /* JSONUploadAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONUploadAPI.swift; sourceTree = "<group>"; };
+		A02F928121D4B7A60052D837 /* XMLUploadAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLUploadAPI.swift; sourceTree = "<group>"; };
 		A0D1913A21D0D47800FCF51A /* ANBaseNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ANBaseNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D1913D21D0D47800FCF51A /* ANBaseNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANBaseNetwork.h; sourceTree = "<group>"; };
 		A0D1913E21D0D47800FCF51A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,7 +76,9 @@
 				A0D1913E21D0D47800FCF51A /* Info.plist */,
 				A0D1914A21D0DFC300FCF51A /* BaseAPI.swift */,
 				A0D1914B21D0DFC300FCF51A /* JSONRequestAPI.swift */,
+				A02F927F21D4B6B80052D837 /* JSONUploadAPI.swift */,
 				A0D1914C21D0DFC300FCF51A /* XMLRequestAPI.swift */,
+				A02F928121D4B7A60052D837 /* XMLUploadAPI.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -168,7 +174,9 @@
 			files = (
 				A0D1914E21D0DFC400FCF51A /* JSONRequestAPI.swift in Sources */,
 				A0D1914D21D0DFC400FCF51A /* BaseAPI.swift in Sources */,
+				A02F928221D4B7A60052D837 /* XMLUploadAPI.swift in Sources */,
 				A0D1914F21D0DFC400FCF51A /* XMLRequestAPI.swift in Sources */,
+				A02F928021D4B6B80052D837 /* JSONUploadAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
