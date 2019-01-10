@@ -1,5 +1,5 @@
 //
-//  JSONUploadAPI.swift
+//  DataUploadAPI.swift
 //  ANBaseNetwork
 //
 //  Created by 刘栋 on 2018/12/27.
@@ -8,18 +8,17 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 
-public protocol JSONUploadAPI: BaseAPI {
+public protocol DataUploadAPI: BaseAPI {
     
     associatedtype ResultType
     
     func handle(fromData: Alamofire.MultipartFormData)
     
-    func handle(json: JSON) -> Alamofire.Result<ResultType>
+    func handle(data: Data) -> Alamofire.Result<ResultType>
 }
 
-public func upload<T: JSONUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
+public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
     Alamofire.upload(multipartFormData: { fromData in
         api.handle(fromData: fromData)
     }, to: api.url, method: api.method, headers: api.headers) { encodingResult in
@@ -27,13 +26,12 @@ public func upload<T: JSONUploadAPI>(api: T, completion: @escaping (Alamofire.Re
         case .failure(let error):
             completion(.failure(error))
         case .success(let request, _, _):
-            request.responseJSON { response in
+            request.responseData { response in
                 switch response.result {
                 case let .failure(error):
                     completion(Result.failure(error))
-                case let .success(object):
-                    let json = JSON(object)
-                    completion(api.handle(json: json))
+                case let .success(data):
+                    completion(api.handle(data: data))
                 }
             }
         }
