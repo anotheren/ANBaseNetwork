@@ -24,9 +24,7 @@
 		A0D1914921D0D75800FCF51A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A0D1914A21D0DFC300FCF51A /* BaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		A0D1914B21D0DFC300FCF51A /* DataRequestAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRequestAPI.swift; sourceTree = "<group>"; };
-		A0D1915121D0DFEB00FCF51A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		A0D1915221D0DFEB00FCF51A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		A0D1915321D0DFEB00FCF51A /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				A0D1915221D0DFEB00FCF51A /* Alamofire.framework */,
-				A0D1915121D0DFEB00FCF51A /* SwiftyJSON.framework */,
-				A0D1915321D0DFEB00FCF51A /* SWXMLHash.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
