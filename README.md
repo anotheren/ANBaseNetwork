@@ -28,4 +28,4 @@ github "anotheren/ANBaseNetwork" ~> 1.2
 
 ## License
 
-ANBaseNetwork is released under the MIT license. See LICENSE for details.
+ANBaseNetwork is released under the MIT license. See [LICENSE](./LICENSE) for details.
