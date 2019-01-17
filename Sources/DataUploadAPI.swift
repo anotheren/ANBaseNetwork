@@ -29,7 +29,7 @@ public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Re
             request.responseData { response in
                 switch response.result {
                 case let .failure(error):
-                    completion(Result.failure(error))
+                    completion(.failure(error))
                 case let .success(data):
                     completion(api.handle(data: data))
                 }
