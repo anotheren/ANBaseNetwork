@@ -9,7 +9,7 @@
 import Alamofire
 
 public typealias ParametersHandle = (BaseAPI, Parameters) -> Parameters
-public typealias HeaderHandle = (BaseAPI, Parameters, HTTPHeaders) -> HTTPHeaders
+public typealias HeadersHandle = (BaseAPI, Parameters, HTTPHeaders) -> HTTPHeaders
 
 public final class NetworkManager {
     
@@ -17,7 +17,7 @@ public final class NetworkManager {
     
     private init() { }
     
-    public var headerHandle: HeaderHandle = { (api, params, headers) in
+    public var headersHandle: HeadersHandle = { (api, params, headers) in
         return headers
     }
     
@@ -30,7 +30,7 @@ extension NetworkManager {
     
     public func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
-        let fullHeaders: HTTPHeaders = headerHandle(api, fullParameters, api.headers)
+        let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
         
         return Alamofire.request(api.url, method: api.method, parameters: fullParameters, encoding: api.encoding, headers: fullHeaders).responseData { response in
             switch response.result {
@@ -47,7 +47,7 @@ extension NetworkManager {
     
     public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
-        let fullHeaders: HTTPHeaders = headerHandle(api, fullParameters, api.headers)
+        let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
         
         Alamofire.upload(multipartFormData: { fromData in
             api.handle(fromData: fromData)
