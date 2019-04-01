@@ -18,22 +18,8 @@ public protocol DataUploadAPI: BaseAPI {
     func handle(data: Data) -> Alamofire.Result<ResultType>
 }
 
-public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
-    Alamofire.upload(multipartFormData: { fromData in
-        api.handle(fromData: fromData)
-    }, to: api.url, method: api.method, headers: api.headers) { encodingResult in
-        switch encodingResult {
-        case .failure(let error):
-            completion(.failure(error))
-        case .success(let request, _, _):
-            request.responseData { response in
-                switch response.result {
-                case let .failure(error):
-                    completion(.failure(error))
-                case let .success(data):
-                    completion(api.handle(data: data))
-                }
-            }
-        }
-    }
+public func upload<T: DataUploadAPI>(api: T,
+                                     manager: NetworkManager = BaseNetworkManager.shared,
+                                     completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
+    manager.upload(api: api, completion: completion)
 }

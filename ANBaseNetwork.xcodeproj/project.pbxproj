@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A02F928021D4B6B80052D837 /* DataUploadAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02F927F21D4B6B80052D837 /* DataUploadAPI.swift */; };
+		A03D5FA12251C1C400235069 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D5FA02251C1C400235069 /* NetworkManager.swift */; };
+		A03D5FA32251EDEB00235069 /* BaseNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03D5FA22251EDEB00235069 /* BaseNetworkManager.swift */; };
 		A0D1913F21D0D47800FCF51A /* ANBaseNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = A0D1913D21D0D47800FCF51A /* ANBaseNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0D1914D21D0DFC400FCF51A /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1914A21D0DFC300FCF51A /* BaseAPI.swift */; };
 		A0D1914E21D0DFC400FCF51A /* DataRequestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1914B21D0DFC300FCF51A /* DataRequestAPI.swift */; };
@@ -16,6 +18,8 @@
 
 /* Begin PBXFileReference section */
 		A02F927F21D4B6B80052D837 /* DataUploadAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUploadAPI.swift; sourceTree = "<group>"; };
+		A03D5FA02251C1C400235069 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A03D5FA22251EDEB00235069 /* BaseNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkManager.swift; sourceTree = "<group>"; };
 		A0D1913A21D0D47800FCF51A /* ANBaseNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ANBaseNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D1913D21D0D47800FCF51A /* ANBaseNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANBaseNetwork.h; sourceTree = "<group>"; };
 		A0D1913E21D0D47800FCF51A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 			children = (
 				A0D1913D21D0D47800FCF51A /* ANBaseNetwork.h */,
 				A0D1913E21D0D47800FCF51A /* Info.plist */,
+				A03D5FA02251C1C400235069 /* NetworkManager.swift */,
+				A03D5FA22251EDEB00235069 /* BaseNetworkManager.swift */,
 				A0D1914A21D0DFC300FCF51A /* BaseAPI.swift */,
 				A0D1914B21D0DFC300FCF51A /* DataRequestAPI.swift */,
 				A02F927F21D4B6B80052D837 /* DataUploadAPI.swift */,
@@ -162,6 +168,8 @@
 				A0D1914E21D0DFC400FCF51A /* DataRequestAPI.swift in Sources */,
 				A0D1914D21D0DFC400FCF51A /* BaseAPI.swift in Sources */,
 				A02F928021D4B6B80052D837 /* DataUploadAPI.swift in Sources */,
+				A03D5FA32251EDEB00235069 /* BaseNetworkManager.swift in Sources */,
+				A03D5FA12251C1C400235069 /* NetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

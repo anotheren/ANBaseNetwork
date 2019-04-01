@@ -17,13 +17,8 @@ public protocol DataRequestAPI: BaseAPI {
 }
 
 @discardableResult
-public func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest {
-    return request(api.url, method: api.method, parameters: api.parameters, encoding: api.encoding, headers: api.headers).responseData { response in
-        switch response.result {
-        case let .failure(error):
-            completion(.failure(error))
-        case let .success(data):
-            completion(api.handle(data: data))
-        }
-    }
+public func request<T: DataRequestAPI>(api: T,
+                                       manager: NetworkManager = BaseNetworkManager.shared,
+                                       completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest {
+    return manager.request(api: api, completion: completion)
 }
