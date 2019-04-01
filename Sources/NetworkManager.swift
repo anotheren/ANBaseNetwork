@@ -13,15 +13,18 @@ public typealias HeaderHandle = (Parameters, HTTPHeaders) -> HTTPHeaders
 
 public protocol NetworkManager {
     
-    var headerHandle: HeaderHandle? { get set }
-    var parametersHandle: ParametersHandle? { get set}
+    var headerHandle: HeaderHandle { get set }
+    var parametersHandle: ParametersHandle { get set}
+    
+    func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest
+    func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void)
 }
 
 extension NetworkManager {
     
     public func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest {
-        let fullParameters: Parameters = parametersHandle?(api.parameters) ?? api.parameters
-        let fullHeaders: HTTPHeaders = headerHandle?(fullParameters, api.headers) ?? api.headers
+        let fullParameters: Parameters = parametersHandle(api.parameters)
+        let fullHeaders: HTTPHeaders = headerHandle(fullParameters, api.headers)
         
         return Alamofire.request(api.url, method: api.method, parameters: fullParameters, encoding: api.encoding, headers: fullHeaders).responseData { response in
             switch response.result {
@@ -37,8 +40,8 @@ extension NetworkManager {
 extension NetworkManager {
     
     public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
-        let fullParameters: Parameters = parametersHandle?(api.parameters) ?? api.parameters
-        let fullHeaders: HTTPHeaders = headerHandle?(fullParameters, api.headers) ?? api.headers
+        let fullParameters: Parameters = parametersHandle(api.parameters)
+        let fullHeaders: HTTPHeaders = headerHandle(fullParameters, api.headers) 
         
         Alamofire.upload(multipartFormData: { fromData in
             api.handle(fromData: fromData)
