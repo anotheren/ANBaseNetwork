@@ -14,11 +14,11 @@ open class BaseNetworkManager: NetworkManager {
     
     private init() { }
     
-    public var headerHandle: HeaderHandle = { (params, headers) in
+    public var headerHandle: HeaderHandle = { (api, params, headers) in
         return headers
     }
     
-    public var parametersHandle: ParametersHandle = { params -> Parameters in 
+    public var parametersHandle: ParametersHandle = { api, params -> Parameters in
         return params
     }
 }
