@@ -11,13 +11,19 @@ import Alamofire
 public typealias ParametersHandle = (BaseAPI, Parameters) -> Parameters
 public typealias HeaderHandle = (BaseAPI, Parameters, HTTPHeaders) -> HTTPHeaders
 
-public protocol NetworkManager {
+public final class NetworkManager {
     
-    var headerHandle: HeaderHandle { get set }
-    var parametersHandle: ParametersHandle { get set}
+    public static let shared = NetworkManager()
     
-    func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest
-    func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void)
+    private init() { }
+    
+    public var headerHandle: HeaderHandle = { (api, params, headers) in
+        return headers
+    }
+    
+    public var parametersHandle: ParametersHandle = { api, params -> Parameters in
+        return params
+    }
 }
 
 extension NetworkManager {

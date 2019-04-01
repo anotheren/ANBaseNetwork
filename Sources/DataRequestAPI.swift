@@ -18,7 +18,6 @@ public protocol DataRequestAPI: BaseAPI {
 
 @discardableResult
 public func request<T: DataRequestAPI>(api: T,
-                                       manager: NetworkManager = BaseNetworkManager.shared,
                                        completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest {
-    return manager.request(api: api, completion: completion)
+    return NetworkManager.shared.request(api: api, completion: completion)
 }
