@@ -20,6 +20,14 @@ public final class NetworkManager {
     public var timeoutIntervalForRequest: TimeInterval = 10
     public var timeoutIntervalForResource: TimeInterval = 10
     
+    private lazy var manager: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
+        configuration.timeoutIntervalForResource = timeoutIntervalForResource
+        return SessionManager(configuration: configuration)
+    }()
+    
     public var headersHandle: HeadersHandle = { (api, params, headers) in
         return headers
     }
@@ -34,11 +42,6 @@ extension NetworkManager {
     public func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
         let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
-        
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
-        configuration.timeoutIntervalForResource = timeoutIntervalForResource
-        let manager = SessionManager(configuration: configuration)
         
         return manager.request(api.url, method: api.method, parameters: fullParameters, encoding: api.encoding, headers: fullHeaders).responseData { response in
             switch response.result {
@@ -56,11 +59,6 @@ extension NetworkManager {
     public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
         let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
-        
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
-        configuration.timeoutIntervalForResource = timeoutIntervalForResource
-        let manager = SessionManager(configuration: configuration)
         
         manager.upload(multipartFormData: { fromData in
             api.handle(fromData: fromData)
