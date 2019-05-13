@@ -17,6 +17,9 @@ public final class NetworkManager {
     
     private init() { }
     
+    public var timeoutIntervalForRequest: TimeInterval = 10
+    public var timeoutIntervalForResource: TimeInterval = 10
+    
     public var headersHandle: HeadersHandle = { (api, params, headers) in
         return headers
     }
@@ -32,7 +35,12 @@ extension NetworkManager {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
         let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
         
-        return Alamofire.request(api.url, method: api.method, parameters: fullParameters, encoding: api.encoding, headers: fullHeaders).responseData { response in
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
+        configuration.timeoutIntervalForResource = timeoutIntervalForResource
+        let manager = SessionManager(configuration: configuration)
+        
+        return manager.request(api.url, method: api.method, parameters: fullParameters, encoding: api.encoding, headers: fullHeaders).responseData { response in
             switch response.result {
             case let .failure(error):
                 completion(.failure(error))
@@ -49,7 +57,12 @@ extension NetworkManager {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
         let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
         
-        Alamofire.upload(multipartFormData: { fromData in
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
+        configuration.timeoutIntervalForResource = timeoutIntervalForResource
+        let manager = SessionManager(configuration: configuration)
+        
+        manager.upload(multipartFormData: { fromData in
             api.handle(fromData: fromData)
         }, to: api.url, method: api.method, headers: fullHeaders) { encodingResult in
             switch encodingResult {
