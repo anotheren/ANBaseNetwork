@@ -2,7 +2,7 @@ github "Alamofire/Alamofire"
 
 
 # How to update
-# carthage update --platform iOS --no-use-binaries
+# carthage update --new-resolver --platform iOS --no-use-binaries --cache-builds
 
 # How to install Carthage
 # brew install carthage
