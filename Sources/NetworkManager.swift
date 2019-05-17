@@ -20,7 +20,7 @@ public final class NetworkManager {
     public var timeoutIntervalForRequest: TimeInterval = 10
     public var timeoutIntervalForResource: TimeInterval = 10
     
-    private lazy var manager: SessionManager = {
+    public private(set) lazy var manager: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
         configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
