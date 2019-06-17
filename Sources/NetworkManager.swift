@@ -56,7 +56,7 @@ extension NetworkManager {
 
 extension NetworkManager {
     
-    public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
+    public func upload<T: DataUploadAPI>(api: T, requestHandle: ((UploadRequest) -> Void)?, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
         let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
         
@@ -67,6 +67,7 @@ extension NetworkManager {
             case .failure(let error):
                 completion(.failure(error))
             case .success(let request, _, _):
+                requestHandle?(request)
                 request.responseData { response in
                     switch response.result {
                     case let .failure(error):

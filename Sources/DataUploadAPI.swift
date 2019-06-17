@@ -19,6 +19,7 @@ public protocol DataUploadAPI: BaseAPI {
 }
 
 public func upload<T: DataUploadAPI>(api: T,
+                                     requestHandle: ((UploadRequest) -> Void)? = nil,
                                      completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
-    NetworkManager.shared.upload(api: api, completion: completion)
+    NetworkManager.shared.upload(api: api, requestHandle: requestHandle, completion: completion)
 }
