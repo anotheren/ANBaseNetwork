@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public protocol BaseAPI {
+public protocol BaseAPI: CustomStringConvertible {
     
     var baseURL: String { get }
     var path: String { get }
@@ -36,5 +36,17 @@ extension BaseAPI {
     
     public var headers: Alamofire.HTTPHeaders {
         return [:]
+    }
+}
+
+extension BaseAPI {
+    
+    public var description: String {
+        let reuslt = """
+        URL: \(url)
+        METHOD: \(method)
+        PARAMETERS: \(parameters)
+        """
+        return reuslt
     }
 }
