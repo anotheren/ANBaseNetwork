@@ -17,11 +17,13 @@ public final class NetworkManager {
     
     private init() { }
     
+    public let identifier = "com.anotheren.ANBaseNetwork"
+    
     public var timeoutIntervalForRequest: TimeInterval = 15
     public var timeoutIntervalForResource: TimeInterval = 15
     
     public private(set) lazy var manager: SessionManager = {
-        let configuration = URLSessionConfiguration.background(withIdentifier: "com.anotheren.ANBaseNetwork")
+        let configuration = URLSessionConfiguration.background(withIdentifier: identifier)
         configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
         configuration.sessionSendsLaunchEvents = true
         configuration.isDiscretionary = true
