@@ -35,15 +35,6 @@ public final class NetworkManager {
     public var parametersHandle: ParametersHandle = { api, params -> Parameters in
         return params
     }
-    
-    public var backgroundCompletionHandler: (() -> Void)? {
-        get {
-            return manager.backgroundCompletionHandler
-        }
-        set {
-            manager.backgroundCompletionHandler = newValue
-        }
-    }
 }
 
 extension NetworkManager {
