@@ -18,6 +18,7 @@
 /* Begin PBXFileReference section */
 		A02F927F21D4B6B80052D837 /* DataUploadAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUploadAPI.swift; sourceTree = "<group>"; };
 		A03D5FA02251C1C400235069 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A068AB012369879100C6D765 /* ANBaseNetwork.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ANBaseNetwork.podspec; sourceTree = "<group>"; };
 		A0D1913A21D0D47800FCF51A /* ANBaseNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ANBaseNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D1913D21D0D47800FCF51A /* ANBaseNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANBaseNetwork.h; sourceTree = "<group>"; };
 		A0D1913E21D0D47800FCF51A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 				A0D1914521D0D4E100FCF51A /* Cartfile */,
 				A0D1914821D0D74300FCF51A /* LICENSE */,
 				A0D1914921D0D75800FCF51A /* README.md */,
+				A068AB012369879100C6D765 /* ANBaseNetwork.podspec */,
 				A0D1913C21D0D47800FCF51A /* Sources */,
 				A0D1913B21D0D47800FCF51A /* Products */,
 				A0D1915021D0DFEB00FCF51A /* Frameworks */,
@@ -318,7 +320,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = "2.0.0-rc.1";
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anotheren.ANBaseNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -352,7 +354,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = "2.0.0-rc.1";
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.anotheren.ANBaseNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
