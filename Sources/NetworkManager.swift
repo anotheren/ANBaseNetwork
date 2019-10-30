@@ -17,15 +17,14 @@ public final class NetworkManager {
     
     private init() { }
     
-    public var timeoutIntervalForRequest: TimeInterval = 15
-    public var timeoutIntervalForResource: TimeInterval = 15
+    public var timeoutIntervalForRequest: TimeInterval = 30
+    public var timeoutIntervalForResource: TimeInterval = 30
     
-    public private(set) lazy var manager: SessionManager = {
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+    public private(set) lazy var manager: Session = {
+        let configuration = URLSessionConfiguration.af.default
         configuration.timeoutIntervalForRequest = timeoutIntervalForRequest
         configuration.timeoutIntervalForResource = timeoutIntervalForResource
-        return SessionManager(configuration: configuration)
+        return Session(configuration: configuration)
     }()
     
     public var headersHandle: HeadersHandle = { (api, params, headers) in
@@ -39,7 +38,7 @@ public final class NetworkManager {
 
 extension NetworkManager {
     
-    public func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest {
+    public func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType, Error>) -> Void) -> DataRequest {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
         let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
         
@@ -56,26 +55,18 @@ extension NetworkManager {
 
 extension NetworkManager {
     
-    public func upload<T: DataUploadAPI>(api: T, requestHandle: ((UploadRequest) -> Void)?, completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
+    public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Result<T.ResultType, Error>) -> Void) -> UploadRequest {
         let fullParameters: Parameters = parametersHandle(api, api.parameters)
         let fullHeaders: HTTPHeaders = headersHandle(api, fullParameters, api.headers)
         
-        manager.upload(multipartFormData: { fromData in
+        return manager.upload(multipartFormData: { fromData in
             api.handle(fromData: fromData)
-        }, to: api.url, method: api.method, headers: fullHeaders) { encodingResult in
-            switch encodingResult {
-            case .failure(let error):
+        }, to: api.url, method: api.method, headers: fullHeaders).responseData { response in
+            switch response.result {
+            case let .failure(error):
                 completion(.failure(error))
-            case .success(let request, _, _):
-                requestHandle?(request)
-                request.responseData { response in
-                    switch response.result {
-                    case let .failure(error):
-                        completion(.failure(error))
-                    case let .success(data):
-                        completion(api.handle(data: data))
-                    }
-                }
+            case let .success(data):
+                completion(api.handle(data: data))
             }
         }
     }

@@ -13,11 +13,10 @@ public protocol DataRequestAPI: BaseAPI {
     
     associatedtype ResultType
     
-    func handle(data: Data) -> Result<ResultType>
+    func handle(data: Data) -> Result<ResultType, Error>
 }
 
 @discardableResult
-public func request<T: DataRequestAPI>(api: T,
-                                       completion: @escaping (Result<T.ResultType>) -> Void) -> Alamofire.DataRequest {
+public func request<T: DataRequestAPI>(api: T, completion: @escaping (Result<T.ResultType, Error>) -> Void) -> DataRequest {
     return NetworkManager.shared.request(api: api, completion: completion)
 }

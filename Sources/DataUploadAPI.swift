@@ -13,13 +13,10 @@ public protocol DataUploadAPI: BaseAPI {
     
     associatedtype ResultType
     
-    func handle(fromData: Alamofire.MultipartFormData)
-    
-    func handle(data: Data) -> Alamofire.Result<ResultType>
+    func handle(fromData: MultipartFormData)
+    func handle(data: Data) -> Result<ResultType, Error>
 }
 
-public func upload<T: DataUploadAPI>(api: T,
-                                     requestHandle: ((UploadRequest) -> Void)? = nil,
-                                     completion: @escaping (Alamofire.Result<T.ResultType>) -> Void) {
-    NetworkManager.shared.upload(api: api, requestHandle: requestHandle, completion: completion)
+public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Result<T.ResultType, Error>) -> Void) -> UploadRequest {
+    return NetworkManager.shared.upload(api: api, completion: completion)
 }
