@@ -17,6 +17,7 @@ public protocol DataUploadAPI: BaseAPI {
     func handle(data: Data) -> Result<ResultType, Error>
 }
 
+@discardableResult
 public func upload<T: DataUploadAPI>(api: T, completion: @escaping (Result<T.ResultType, Error>) -> Void) -> UploadRequest {
     return NetworkManager.shared.upload(api: api, completion: completion)
 }
