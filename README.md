@@ -4,8 +4,8 @@
 ## Requirements
 
 * iOS 10.0+
-* Xcode 10.2
-* Swift 5.0
+* Xcode 11.3
+* Swift 5.1
 
 ## Installation
 
@@ -23,7 +23,7 @@ $ brew install carthage
 To integrate ANBaseNetwork into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "anotheren/ANBaseNetwork" ~> 1.3
+github "anotheren/ANBaseNetwork" ~> 2.0
 ```
 
 ## License
